@@ -41,7 +41,7 @@
                 tareaResult.innerHTML = '';
                 for (const character of data.result) {
                     const resultString =
-                        `Name: ${character.properties.name}, Height: ${character.properties.height},Mass: ${character.properties.mass}, Gender: ${character.properties.gender}, Hair color: ${character.properties.hair_color}\n`;
+                        `Name: ${character.properties.name}, Height: ${character.properties.height}, Mass: ${character.properties.mass}, Gender: ${character.properties.gender}, Hair color: ${character.properties.hair_color}\n`;
 
                     tareaResult.innerHTML += resultString;
                 }
