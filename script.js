@@ -1,42 +1,45 @@
-
 "use strict";
-
-const txtSearchInput = document.querySelector('#txtSearchInput');
-const btnSearch = document.querySelector('#btnSearch'); // no validation
-const URL_BASE = 'https://www.swapi.tech/api/people/?name=';
-const tareaResult = document.querySelector('#tareaResult');
-const tareaLabelFor = tareaResult.nextElementSibling;
-
+(function (api) {
+    const txtSearchInput = document.querySelector('#txtSearchInput');
+    const URL_BASE = 'https://www.swapi.tech/api/people/?name=';
+    const tareaResult = document.querySelector('#tareaResult');
+    const tareaLabelFor = tareaResult.nextElementSibling;
 
 
-const getApi = ()=> {
-    /*Skriv din kod här*/
-    const searchText = txtSearchInput.value;
-    // const searchText='chewbacca'; //test
 
-    const url = `${URL_BASE}${searchText}`;
+    api.get = function (e) {
+        e.preventDefault();
+        /*Skriv din kod här*/
+        const searchText = txtSearchInput.value;
+        // const searchText='chewbacca'; //test
 
-    fetch(url)
-        .then(result => result.json())
-        .then(data => {
-            /*Och här*/
-            if (data.result.length > 0) {
-                tareaResult.disabled = false;
-                tareaLabelFor.innerHTML = 'Karaktärer';
-            }
-            else {
-                tareaResult.disabled = true;
-                tareaLabelFor.innerHTML = 'Resultat';
-            }
+        const url = `${URL_BASE}${searchText}`;
 
-            for (const character of data.result) {
-                const resultString =
-                    `Name: ${character.properties.name}, Height: ${character.properties.height},Mass: ${character.properties.mass}, Gender: ${character.properties.gender}, Hair color: ${character.properties.hair_color}\n`;
+        fetch(url)
+            .then(result => result.json())
+            .then(data => {
+                /*Och här*/
+                if (data.result.length > 0) {
+                    tareaResult.disabled = false;
+                    tareaLabelFor.innerHTML = 'Karaktärer';
+                }
+                else {
+                    tareaResult.disabled = true;
+                    tareaLabelFor.innerHTML = 'Resultat';
+                }
 
-                tareaResult.innerHTML += resultString;
-            }
-        })
-        .catch(err => console.log(err))
-}
+                for (const character of data.result) {
+                    const resultString =
+                        `Name: ${character.properties.name}, Height: ${character.properties.height},Mass: ${character.properties.mass}, Gender: ${character.properties.gender}, Hair color: ${character.properties.hair_color}\n`;
 
-btnSearch.addEventListener('click', getApi); //no validation
+                    tareaResult.innerHTML += resultString;
+                }
+            })
+            .catch(err => console.log(err))
+    }
+})(window.api = window.api || {});
+// const btnSearch = document.querySelector('#btnSearch'); // no validation
+const frmSearch = document.querySelector('#frmSearch');
+
+// btnSearch.addEventListener('click', api.get); //no validation
+frmSearch.addEventListener('submit', api.get);

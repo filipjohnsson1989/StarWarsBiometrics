@@ -29,14 +29,16 @@
 
     <main class="flex-shrink-0 mt-4">
         <div class="container">
+            <form id="frmSearch">
                 <div class="mb-3">
                     <div class="input-group ">
                         <input id="txtSearchInput" type="text" class="form-control" placeholder="Karaktären"
-                            aria-label="Karaktären" aria-describedby="button-Search"autofocus>
+                            aria-label="Karaktären" aria-describedby="button-Search" minlength="1"  required autofocus>
                         <button id="btnSearch" class="btn btn-outline-secondary btn-primary btn-lg  text-light"
-                            >Söka</button>
+                            type="submit">Söka</button>
                     </div>
                 </div>
+            </form>
             <div class="mb-3">
                 <div class="form-floating text-info">
                     <textarea class="form-control h-100 " placeholder="Resultat" id="tareaResult" rows="5"
